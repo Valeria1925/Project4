@@ -1,4 +1,6 @@
 import com.company.animals.Animal;
+import com.company.animals.AviarySize;
+import foods.WrongAviarySizeException;
 
 import java.util.HashMap;
 
@@ -6,13 +8,19 @@ public class Aviary<Alias extends Animal> {
     private HashMap<String, Alias> seats = new HashMap<String, Alias>();
     int occypiedSeats;
     int maxSeats;
+    AviarySize size;
 
-    public Aviary(int maxSeatsFrom) {
+    public Aviary(int maxSeatsFrom, AviarySize size) {
         maxSeats = maxSeatsFrom;
         occypiedSeats = 0;
+        this.size = size;
     }
 
-    void addAnimal(Alias animal) {
+    void addAnimal(Alias animal) throws WrongAviarySizeException {
+        if (animal.size != this.size) {
+            throw new WrongAviarySizeException("The size is not appropriate");
+        }
+
         if (occypiedSeats < maxSeats) {
             seats.put(animal.name, animal);
             occypiedSeats = occypiedSeats + 1;

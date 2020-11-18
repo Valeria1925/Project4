@@ -3,6 +3,7 @@ package com.company.animals;
 public class Duck extends Carnivorous implements Quackable {
     public Duck(String name) {
         super(name);
+        this.size = AviarySize.SMALL;
     }
 
     @Override

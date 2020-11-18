@@ -2,6 +2,7 @@ package com.company.animals;
 
 import foods.Food;
 import foods.Meat;
+import foods.WrongFoodException;
 
 abstract public class Carnivorous extends Animal {
     public Carnivorous(String name) {
@@ -9,9 +10,9 @@ abstract public class Carnivorous extends Animal {
     }
 
     @Override
-    public void eat(Food food) {
+    public void eat(Food food) throws WrongFoodException {
         if (food.getClass() != new Meat().getClass()) {
-            System.out.println("can't eat it");
+            throw new WrongFoodException("can't eat it");
         } else {
             super.eat(food);
         }

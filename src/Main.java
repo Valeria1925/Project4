@@ -2,24 +2,21 @@
 import com.company.animals.*;
 import foods.Herb;
 import foods.Meat;
+import foods.WrongAviarySizeException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws WrongAviarySizeException {
+        Aviary<Animal> aviary1 = new Aviary<>(3, AviarySize.SMALL);
 
+        try {
+            aviary1.addAnimal(new Duck("donald"));
+            aviary1.addAnimal(new Cow("Mumu"));
+        } catch (WrongAviarySizeException exc) {
+            System.out.println(exc);
+        }
 
-        Aviary<Cow> aviary1 = new Aviary<Cow>(3);
-        aviary1.addAnimal(new Cow("Murka"));
-        aviary1.addAnimal(new Cow("Mumu"));
         aviary1.addAnimal(new Cow("Malyshka"));
         aviary1.checkHealth();
-
-        aviary1.removeAnimal("Malyshka");
-        aviary1.checkHealth();
-
-
-        Cow cow = aviary1.getAnimal("Mumu");
-
-
     }
 }
